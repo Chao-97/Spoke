@@ -61,8 +61,11 @@ export const proxiedUrlFor = url => {
   if (!shouldCorsProxy(url)) {
     return url;
   }
-
-  return `https://${configs.CORS_PROXY_SERVER}/${url}`;
+  if (configs.CORS_PROXY_SERVER.length > 0) {
+    return `https://${configs.CORS_PROXY_SERVER}/${url}`;
+  } else {
+    return url;
+  }
 };
 
 export const scaledThumbnailUrlFor = (url, width, height) => {
